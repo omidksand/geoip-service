@@ -24,6 +24,23 @@ app.get('/:ip', (req, res) => {
    });
 });
 
+/** Error: Not Found (404) */
+app.use((req, res) => {
+   res.json({
+      success: false,
+      error: '404, Invalid reuested.'
+   });
+});
+
+/** Global Error Handler */
+app.use((err, req, res, next) => {
+   res.json({
+      success: false,
+      error: '500, Internal error.'
+   });
+   console.error('*** Server Error Log  ***', err);
+});
+
 app.listen(3000, () => {
    console.log(`IP Geolocation Service v0.1 listening on port ${3000}`);
 });
